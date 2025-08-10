@@ -66,24 +66,19 @@ function library:CreateWindow(WName)
 	Container.SliceCenter = Rect.new(100, 100, 100, 100)
 	Container.SliceScale = 0.040
 
-WindowText.Name = WName
-WindowText.Parent = Holder
-WindowText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-WindowText.BackgroundTransparency = 1.000
-WindowText.BorderSizePixel = 0
-WindowText.Position = UDim2.new(0.0399999991, 0, 0.15384616, 0)
-WindowText.Size = UDim2.new(0, 186, 0, 27)
-WindowText.ZIndex = 5
-WindowText.Font = Enum.Font.SourceSans
-WindowText.Text = WName
-WindowText.TextSize = 22.000
-WindowText.TextXAlignment = Enum.TextXAlignment.Left
-
-if WName == "Music" then
-    WindowText.TextColor3 = Color3.fromRGB(255, 255, 0)  -- żółty
-elseif WName == "Company" then
-    WindowText.TextColor3 = Color3.fromRGB(255, 255, 255) -- biały
-end
+	WindowText.Name = WName
+	WindowText.Parent = Holder
+	WindowText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	WindowText.BackgroundTransparency = 1.000
+	WindowText.BorderSizePixel = 0
+	WindowText.Position = UDim2.new(0.0399999991, 0, 0.15384616, 0)
+	WindowText.Size = UDim2.new(0, 186, 0, 27)
+	WindowText.ZIndex = 5
+	WindowText.Font = Enum.Font.SourceSans
+	WindowText.Text = WName
+	WindowText.TextColor3 = Color3.fromRGB(255, 207, 17)
+	WindowText.TextSize = 22.000
+	WindowText.TextXAlignment = Enum.TextXAlignment.Left
 
 
 	UIListLayout.Parent = Container
@@ -303,7 +298,7 @@ end
 		SliderFrame.ZIndex = 3
 		SliderFrame.Font = Enum.Font.SourceSans
 		SliderFrame.Text = ""
-		SliderFrame.TextColor3 = Color3.fromRGB(0, 0, 0)
+		SliderFrame.TextColor3 = Color3.fromRGB(255, 207, 17)
 		SliderFrame.TextSize = 14.000
 
 		Slider.Name = "Slider"
@@ -412,7 +407,7 @@ end
 		BoxText.Font = Enum.Font.SourceSansSemibold
 		BoxText.LineHeight = 1.100
 		BoxText.Text = Name
-		BoxText.TextColor3 = Color3.fromRGB(255, 255, 255)
+		BoxText.TextColor3 = Color3.fromRGB(255, 207, 17)
 		BoxText.TextSize = 15.000
 		BoxText.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -428,7 +423,7 @@ end
 		Box.LineHeight = 1.500
 		Box.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
 		Box.Text = ""
-		Box.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Box.TextColor3 = Color3.fromRGB(255, 207, 17)
 		Box.TextSize = 14.000
 
 		Box_Roundify_4px.Name = "Box_Roundify_4px"
