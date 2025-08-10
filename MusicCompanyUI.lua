@@ -66,19 +66,25 @@ function library:CreateWindow(WName)
 	Container.SliceCenter = Rect.new(100, 100, 100, 100)
 	Container.SliceScale = 0.040
 
-	WindowText.Name = WName
-	WindowText.Parent = Holder
-	WindowText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	WindowText.BackgroundTransparency = 1.000
-	WindowText.BorderSizePixel = 0
-	WindowText.Position = UDim2.new(0.0399999991, 0, 0.15384616, 0)
-	WindowText.Size = UDim2.new(0, 186, 0, 27)
-	WindowText.ZIndex = 5
-	WindowText.Font = Enum.Font.SourceSans
-	WindowText.Text = WName
-	WindowText.TextColor3 = Color3.fromRGB(15, 15, 15)
-	WindowText.TextSize = 22.000
-	WindowText.TextXAlignment = Enum.TextXAlignment.Left
+WindowText.Name = WName
+WindowText.Parent = Holder
+WindowText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+WindowText.BackgroundTransparency = 1.000
+WindowText.BorderSizePixel = 0
+WindowText.Position = UDim2.new(0.0399999991, 0, 0.15384616, 0)
+WindowText.Size = UDim2.new(0, 186, 0, 27)
+WindowText.ZIndex = 5
+WindowText.Font = Enum.Font.SourceSans
+WindowText.Text = WName
+WindowText.TextSize = 22.000
+WindowText.TextXAlignment = Enum.TextXAlignment.Left
+
+if WName == "Music" then
+    WindowText.TextColor3 = Color3.fromRGB(255, 255, 0)  -- żółty
+elseif WName == "Company" then
+    WindowText.TextColor3 = Color3.fromRGB(255, 255, 255) -- biały
+end
+
 
 	UIListLayout.Parent = Container
 	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
