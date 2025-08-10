@@ -437,7 +437,7 @@ function library:CreateWindow(WName)
 		Box_Roundify_4px.Size = UDim2.new(1, 0, 1.04545462, 0)
 		Box_Roundify_4px.ZIndex = 3
 		Box_Roundify_4px.Image = "rbxassetid://3570695787"
-		Box_Roundify_4px.ImageColor3 = Color3.fromRGB(15, 15, 15)
+		Box_Roundify_4px.ImageColor3 = Color3.fromRGB(20, 20, 20)
 		Box_Roundify_4px.ScaleType = Enum.ScaleType.Slice
 		Box_Roundify_4px.SliceCenter = Rect.new(100, 100, 100, 100)
 		Box_Roundify_4px.SliceScale = 0.040
