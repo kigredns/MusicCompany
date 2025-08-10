@@ -183,7 +183,7 @@ function library:CreateWindow(WName)
 
 		Button.Name = "Button"
 		Button.Parent = ButtonHolder
-		Button.BackgroundColor3 = Color3.fromRGB(4, 4, 4)
+		Button.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 		Button.BackgroundTransparency = 1.000
 		Button.BorderSizePixel = 0
 		Button.Position = UDim2.new(0.0299999993, 0, 0.0810000002, 0)
