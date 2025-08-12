@@ -97,7 +97,7 @@ Title.Font = Enum.Font.GothamSemibold
 Title.TextSize = 20.000
 Title.TextXAlignment = Enum.TextXAlignment.Left
 Title.RichText = true
-Title.Text = '<font color="#FFFFFF">Song</font>' -- Song zostaje białe, Extra zrobimy osobno
+Title.Text = '<font color="#FFFFFF">        Song</font>' -- Song zostaje białe, Extra zrobimy osobno
 
 -- Tworzymy osobny TextLabel dla Extra
 local ExtraLabel = Instance.new("TextLabel")
