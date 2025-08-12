@@ -27,7 +27,7 @@ function Library:CreateWindow(windowname,windowinfo)
     local Cre = Instance.new("ImageLabel")
     local YepTitle = Instance.new("TextLabel")
     local YepCorner = Instance.new("UICorner")
-
+local LabelParent = Home:WaitForChild("LabelHolder") 
     fu8rj82n.Name = "fu8rj82n"
     fu8rj82n.Parent = game.CoreGui
     fu8rj82n.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -315,50 +315,73 @@ end)
 
         local PageElements = {}
 
-        function PageElements:addLabel(labelname,labelinfo)
-            local LabelHolder = Instance.new("Frame")
-            local LabelHolderCorner = Instance.new("UICorner")
-            local LabelTitle = Instance.new("TextLabel")
-            local LabelInfo = Instance.new("TextLabel")
+        local RunService = game:GetService("RunService")
 
-            LabelHolder.Name = "LabelHolder"
-            LabelHolder.Parent = Home
-            LabelHolder.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
-            LabelHolder.BorderColor3 = Color3.fromRGB(17, 17, 17)
-            LabelHolder.BorderSizePixel = 0
-            LabelHolder.Position = UDim2.new(0.0167785231, 0, 0, 0)
-            LabelHolder.Size = UDim2.new(0, 288, 0, 26)
-            
-            LabelHolderCorner.CornerRadius = UDim.new(0, 5)
-            LabelHolderCorner.Name = "LabelHolderCorner"
-            LabelHolderCorner.Parent = LabelHolder
-            
-            LabelTitle.Name = "LabelTitle"
-            LabelTitle.Parent = LabelHolder
-            LabelTitle.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
-            LabelTitle.BackgroundTransparency = 1.000
-            LabelTitle.BorderColor3 = Color3.fromRGB(17, 17, 17)
-            LabelTitle.BorderSizePixel = 0
-            LabelTitle.Size = UDim2.new(0, 288, 0, 15)
-            LabelTitle.Font = Enum.Font.GothamSemibold
-            LabelTitle.Text = labelname or ""
-            LabelTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-            LabelTitle.TextSize = 11.000
-            
-            LabelInfo.Name = "LabelInfo"
-            LabelInfo.Parent = LabelHolder
-            LabelInfo.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
-            LabelInfo.BackgroundTransparency = 1.000
-            LabelInfo.BorderColor3 = Color3.fromRGB(17, 17, 17)
-            LabelInfo.BorderSizePixel = 0
-            LabelInfo.Position = UDim2.new(0, 0, 0.653846145, 0)
-            LabelInfo.Size = UDim2.new(0, 288, 0, 9)
-            LabelInfo.Font = Enum.Font.GothamSemibold
-            LabelInfo.Text = labelinfo or ""
-            LabelInfo.TextColor3 = Color3.fromRGB(255, 255, 255)
-            LabelInfo.TextSize = 9.000
-            LabelInfo.TextTransparency = 0.300
-        end
+-- Container na labelki, ustaw go odpowiednio w swoim GUI
+local LabelParent = Home -- lub inny frame, np. Home:WaitForChild("LabelsHolder")
+
+-- Zmienna do liczenia ile labeli już dodano, żeby je ustawiać pionowo
+local labelCount = 0
+
+function PageElements:addLabel(labelname, labelinfo, options)
+    options = options or {}
+
+    local Color1 = options.Color1 or Color3.fromRGB(150, 0, 255)
+    local Color2 = options.Color2 or Color3.fromRGB(255, 200, 255)
+    local Color3_ = options.Color3 or Color3.fromRGB(150, 0, 255)
+    local Speed = options.Speed or 5
+
+    local LabelHolder = Instance.new("Frame")
+    local LabelHolderCorner = Instance.new("UICorner")
+    local LabelTitle = Instance.new("TextLabel")
+    local LabelInfo = Instance.new("TextLabel")
+
+    LabelHolder.Name = "LabelHolder"
+    LabelHolder.Parent = LabelParent
+    LabelHolder.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+    LabelHolder.BorderSizePixel = 0
+    LabelHolder.Size = UDim2.new(0, 288, 0, 26)
+    LabelHolder.Position = UDim2.new(0, 0, 0, labelCount * 30) -- 30 px odstępu między labelami
+    
+    LabelHolderCorner.CornerRadius = UDim.new(0, 5)
+    LabelHolderCorner.Parent = LabelHolder
+
+    LabelTitle.Name = "LabelTitle"
+    LabelTitle.Parent = LabelHolder
+    LabelTitle.BackgroundTransparency = 1
+    LabelTitle.Size = UDim2.new(1, 0, 0, 15)
+    LabelTitle.Font = Enum.Font.GothamSemibold
+    LabelTitle.TextSize = 11
+    LabelTitle.TextXAlignment = Enum.TextXAlignment.Left
+    LabelTitle.Text = labelname or ""
+
+    -- Gradient + animacja na LabelTitle
+    local gradient = Instance.new("UIGradient")
+    gradient.Parent = LabelTitle
+    gradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color1),
+        ColorSequenceKeypoint.new(0.5, Color2),
+        ColorSequenceKeypoint.new(1, Color3_)
+    }
+
+    RunService.RenderStepped:Connect(function()
+        gradient.Offset = Vector2.new(math.sin(tick() * Speed) * 0.5, 0)
+    end)
+
+    LabelInfo.Name = "LabelInfo"
+    LabelInfo.Parent = LabelHolder
+    LabelInfo.BackgroundTransparency = 1
+    LabelInfo.Position = UDim2.new(0, 0, 0, 15)
+    LabelInfo.Size = UDim2.new(1, 0, 0, 9)
+    LabelInfo.Font = Enum.Font.GothamSemibold
+    LabelInfo.TextSize = 9
+    LabelInfo.Text = labelinfo or ""
+    LabelInfo.TextColor3 = Color3.fromRGB(255, 255, 255)
+    LabelInfo.TextTransparency = 0.3
+    LabelInfo.TextXAlignment = Enum.TextXAlignment.Left
+
+    labelCount = labelCount + 1
+end
 
         function PageElements:addButton(buttonname,callback)
             local ButtonHolder = Instance.new("Frame")
