@@ -83,6 +83,8 @@ function Library:CreateWindow(windowname,windowinfo)
     PageFolder.Name = "PageFolder"
     PageFolder.Parent = PageContainer
 
+local RunService = game:GetService("RunService")
+
 Title.Name = "Title"
 Title.Parent = Frame
 Title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -92,10 +94,38 @@ Title.BorderSizePixel = 0
 Title.Position = UDim2.new(0.0428240746, 0, 0.028070176, 0)
 Title.Size = UDim2.new(0, 355, 0, 33)
 Title.Font = Enum.Font.GothamSemibold
-Title.RichText = true
-Title.Text = '<font color="#FF00FF">Extra</font> <font color="#FFFFFF">Song</font>'
 Title.TextSize = 20.000
 Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.RichText = true
+Title.Text = '<font color="#FFFFFF">Song</font>' -- Song zostaje białe, Extra zrobimy osobno
+
+-- Tworzymy osobny TextLabel dla Extra
+local ExtraLabel = Instance.new("TextLabel")
+ExtraLabel.Name = "ExtraLabel"
+ExtraLabel.Parent = Title
+ExtraLabel.BackgroundTransparency = 1
+ExtraLabel.Size = UDim2.new(0, 80, 1, 0) -- dopasuj szerokość do słowa "Extra"
+ExtraLabel.Position = UDim2.new(0, 0, 0, 0)
+ExtraLabel.Font = Enum.Font.GothamSemibold
+ExtraLabel.TextSize = 20
+ExtraLabel.Text = "Extra"
+ExtraLabel.TextXAlignment = Enum.TextXAlignment.Left
+ExtraLabel.TextColor3 = Color3.fromRGB(255, 0, 255)
+
+-- Gradient dla Extra
+local gradient = Instance.new("UIGradient")
+gradient.Parent = ExtraLabel
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(150, 0, 255)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 200, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 0, 255))
+}
+
+-- Animacja falowania gradientu
+RunService.RenderStepped:Connect(function()
+    gradient.Offset = Vector2.new(math.sin(tick() * 2) * 0.5, 0)
+end)
+
 
 
     Yep.Name = "Yep"
