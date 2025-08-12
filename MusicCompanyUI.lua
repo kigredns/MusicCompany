@@ -97,14 +97,13 @@ Title.Font = Enum.Font.GothamSemibold
 Title.TextSize = 25.000
 Title.TextXAlignment = Enum.TextXAlignment.Left
 Title.RichText = true
-Title.Text = '<font color="#FFFFFF">                 Song</font>' -- Song zostaje białe, Extra zrobimy osobno
+Title.Text = '<font color="#FFFFFF">             Song</font>' 
 
--- Tworzymy osobny TextLabel dla Extra
 local ExtraLabel = Instance.new("TextLabel")
 ExtraLabel.Name = "ExtraLabel"
 ExtraLabel.Parent = Title
 ExtraLabel.BackgroundTransparency = 1
-ExtraLabel.Size = UDim2.new(0, 80, 1, 0) -- dopasuj szerokość do słowa "Extra"
+ExtraLabel.Size = UDim2.new(0, 80, 1, 0)
 ExtraLabel.Position = UDim2.new(0, 0, 0, 0)
 ExtraLabel.Font = Enum.Font.GothamSemibold
 ExtraLabel.TextSize = 25
@@ -112,7 +111,6 @@ ExtraLabel.Text = "Extra"
 ExtraLabel.TextXAlignment = Enum.TextXAlignment.Left
 ExtraLabel.TextColor3 = Color3.fromRGB(255, 0, 255)
 
--- Gradient dla Extra
 local gradient = Instance.new("UIGradient")
 gradient.Parent = ExtraLabel
 gradient.Color = ColorSequence.new{
@@ -121,12 +119,9 @@ gradient.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 0, 255))
 }
 
--- Animacja falowania gradientu
 RunService.RenderStepped:Connect(function()
-    gradient.Offset = Vector2.new(math.sin(tick() * 2) * 0.5, 0)
+    gradient.Offset = Vector2.new(math.sin(tick() * 5) * 0.5, 0)
 end)
-
-
 
     Yep.Name = "Yep"
     Yep.Parent = Frame
