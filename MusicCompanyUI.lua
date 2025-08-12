@@ -107,7 +107,7 @@ ExtraLabel.Size = UDim2.new(0, 80, 1, 0)
 ExtraLabel.Position = UDim2.new(0, 0, 0, 0)
 ExtraLabel.Font = Enum.Font.GothamSemibold
 ExtraLabel.TextSize = 25
-ExtraLabel.Text = "Extra"
+ExtraLabel.Text = "Demonic"
 ExtraLabel.TextXAlignment = Enum.TextXAlignment.Left
 ExtraLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
 
