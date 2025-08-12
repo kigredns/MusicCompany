@@ -83,19 +83,20 @@ function Library:CreateWindow(windowname,windowinfo)
     PageFolder.Name = "PageFolder"
     PageFolder.Parent = PageContainer
 
-    Title.Name = "Title"
-    Title.Parent = Frame
-    Title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    Title.BackgroundTransparency = 1.000
-    Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Title.BorderSizePixel = 0
-    Title.Position = UDim2.new(0.0428240746, 0, 0.028070176, 0)
-    Title.Size = UDim2.new(0, 355, 0, 33)
-    Title.Font = Enum.Font.GothamSemibold
-    Title.Text = windowname
-    Title.TextColor3 = Color3.fromRGB(255, 0, 255)
-    Title.TextSize = 14.000
-    Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Name = "Title"
+Title.Parent = Frame
+Title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Title.BackgroundTransparency = 1.000
+Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Title.BorderSizePixel = 0
+Title.Position = UDim2.new(0.0428240746, 0, 0.028070176, 0)
+Title.Size = UDim2.new(0, 355, 0, 33)
+Title.Font = Enum.Font.GothamSemibold
+Title.RichText = true
+Title.Text = '<font color="#FF00FF">Extra</font> <font color="#FFFFFF">Song</font>'
+Title.TextSize = 20.000
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
 
     Yep.Name = "Yep"
     Yep.Parent = Frame
