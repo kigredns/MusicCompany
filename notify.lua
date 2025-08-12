@@ -52,31 +52,34 @@ demonicLabel.BackgroundTransparency = 1
 demonicLabel.Position = UDim2.new(0.088, 0, 0, 0)
 demonicLabel.Size = UDim2.new(0, 80, 0, 28)
 demonicLabel.Name = "DemonicLabel"
-demonicLabel.TextColor3 = Color3.new(1, 0, 0)
+demonicLabel.TextColor3 = Color3.fromRGB(180, 0, 0) 
 
 local gradient = Instance.new("UIGradient")
 gradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(180, 0, 0)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 100, 100)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 0, 0)),
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(180, 0, 0)),     
+    ColorSequenceKeypoint.new(0.45, Color3.fromRGB(180, 0, 0)), 
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 100, 100)), 
+    ColorSequenceKeypoint.new(0.55, Color3.fromRGB(180, 0, 0)), 
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 0, 0))     
 }
-gradient.Rotation = 45
+gradient.Rotation = 0 
 gradient.Parent = demonicLabel
+
 local songsLabel = Instance.new("TextLabel")
 songsLabel.Parent = frame
 songsLabel.Font = Enum.Font[font]
-songsLabel.Text = "    Songs"
+songsLabel.Text = "Songs"
 songsLabel.TextSize = 14
 songsLabel.TextXAlignment = Enum.TextXAlignment.Left
 songsLabel.BackgroundTransparency = 1
-songsLabel.Position = UDim2.new(0.25, 0, 0, 0) 
+songsLabel.Position = UDim2.new(0.25, 0, 0, 0)
 songsLabel.Size = UDim2.new(0, 80, 0, 28)
 songsLabel.Name = "SongsLabel"
 songsLabel.TextColor3 = Color3.new(1, 1, 1)
 
 local runService = game:GetService("RunService")
 local offset = 0
-local speed = 0.5 
+local speed = 0.2
 
 runService.Heartbeat:Connect(function(dt)
     offset = offset + dt * speed
