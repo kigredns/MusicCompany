@@ -79,7 +79,7 @@ songsLabel.TextColor3 = Color3.new(1, 1, 1)
 
 local runService = game:GetService("RunService")
 local offset = 0
-local speed = 0.2
+local speed = 1
 
 runService.Heartbeat:Connect(function(dt)
     offset = offset + dt * speed
