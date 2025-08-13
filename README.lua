@@ -392,15 +392,25 @@ okayStroke.Parent = OkayBtn
         local TabBtnIndicator = Instance.new("Frame")
         local TabBtnIndicatorCorner = Instance.new("UICorner")
 
-        TabBtn.Name = "TabBtn"
-        TabBtn.Parent = TabHold
-        TabBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        TabBtn.BackgroundTransparency = 1.000
-        TabBtn.Size = UDim2.new(0, 107, 0, 21)
-        TabBtn.Font = Enum.Font.SourceSans
-        TabBtn.Text = ""
-        TabBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
-        TabBtn.TextSize = 14.000
+local TabBtn = Instance.new("TextButton")
+TabBtn.Name = "TabBtn"
+TabBtn.Parent = TabHold
+TabBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TabBtn.BackgroundTransparency = 1.000
+TabBtn.Size = UDim2.new(0, 107, 0, 21)
+TabBtn.Font = Enum.Font.SourceSans
+TabBtn.Text = ""
+TabBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+TabBtn.TextSize = 14.000
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 8)  
+corner.Parent = TabBtn
+
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(0, 0, 0)
+stroke.Thickness = 1  
+stroke.Parent = TabBtn
 
         TabTitle.Name = "TabTitle"
         TabTitle.Parent = TabBtn
@@ -1553,15 +1563,26 @@ dropStroke.Parent = DropdownBtn
             local LabelCorner = Instance.new("UICorner")
             local LabelTitle = Instance.new("TextLabel")
 
-            Label.Name = "Button"
-            Label.Parent = Tab
-            Label.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
-            Label.Size = UDim2.new(0, 363, 0, 42)
-            Label.AutoButtonColor = false
-            Label.Font = Enum.Font.SourceSans
-            Label.Text = ""
-            Label.TextColor3 = Color3.fromRGB(0, 0, 0)
-            Label.TextSize = 14.000
+local Label = Instance.new("TextButton")  -- lub TextLabel, jeśli to Label, nie przycisk
+Label.Name = "Button"
+Label.Parent = Tab
+Label.BackgroundColor3 = Color3.fromRGB(14, 14, 14)
+Label.Size = UDim2.new(0, 363, 0, 42)
+Label.AutoButtonColor = false
+Label.Font = Enum.Font.SourceSans
+Label.Text = ""
+Label.TextColor3 = Color3.fromRGB(0, 0, 0)
+Label.TextSize = 14.000
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 19) 
+corner.Parent = Label
+
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(255, 255, 255)
+stroke.Thickness = 2  
+stroke.Parent = Label
+
 
             LabelCorner.CornerRadius = UDim.new(0, 5)
             LabelCorner.Name = "ButtonCorner"
