@@ -2,33 +2,35 @@ local notif = {}
 
 function notif:Notification(title, desc, font, font2, visibletime)
     pcall(function()
-        local screenGui = Instance.new("ScreenGui")
+        local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
         screenGui.Name = title
         screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-        screenGui.Parent = game:GetService("CoreGui")
 
         local instances = {
             ["UICorner_1"] = Instance.new("UICorner"),
+            ["LocalScript_1"] = Instance.new("LocalScript"),
             ["Frame_2"] = Instance.new("Frame"),
             ["UICorner_2"] = Instance.new("UICorner"),
-            ["TextLabel_1"] = Instance.new("TextLabel"), 
-            ["TextLabel_2"] = Instance.new("TextLabel"), 
-            ["TextLabel_3"] = Instance.new("TextLabel"), 
+            ["TextLabel_1"] = Instance.new("TextLabel"),
+            ["Frame_1"] = Instance.new("Frame"),
+            ["TextLabel_2"] = Instance.new("TextLabel"),
+            ["LocalScript_2"] = Instance.new("LocalScript"),
             ["TextButton_1"] = Instance.new("TextButton"),
         }
 
-        instances.Frame_1 = Instance.new("Frame")
-        instances.Frame_1.Name = "Main"
+        -- Główna ramka
         instances.Frame_1.Parent = screenGui
+        instances.Frame_1.Name = 'Main'
         instances.Frame_1.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
         instances.Frame_1.BorderSizePixel = 0
         instances.Frame_1.Position = UDim2.new(1, 0, 0.509, 0)
         instances.Frame_1.Size = UDim2.new(0, 331, 0, 61)
 
+        -- Lewy pasek
         instances.Frame_2.Parent = instances.Frame_1
-        instances.Frame_2.Name = "Bar"
         instances.Frame_2.BackgroundColor3 = Color3.new(0.0431373, 0.0431373, 0.0431373)
         instances.Frame_2.Size = UDim2.new(0, 11, 0, 61)
+        instances.Frame_2.Name = 'Bar'
 
         instances.UICorner_1.Parent = instances.Frame_2
         instances.UICorner_1.CornerRadius = UDim.new(0, 10)
@@ -38,9 +40,9 @@ function notif:Notification(title, desc, font, font2, visibletime)
 
         local frame = instances.Frame_1
 
-        local demonicLabel = instances.TextLabel_1
+        -- Label 'Demonic' z metaliczną falującą animacją
+        local demonicLabel = Instance.new("TextLabel")
         demonicLabel.Parent = frame
-        demonicLabel.Name = "DemonicLabel"
         demonicLabel.Font = Enum.Font[font]
         demonicLabel.Text = "Demonic"
         demonicLabel.TextSize = 14
@@ -48,22 +50,41 @@ function notif:Notification(title, desc, font, font2, visibletime)
         demonicLabel.BackgroundTransparency = 1
         demonicLabel.Position = UDim2.new(0.088, 0, 0, 0)
         demonicLabel.Size = UDim2.new(0, 80, 0, 28)
-        demonicLabel.TextColor3 = Color3.fromRGB(180, 0, 0)
+        demonicLabel.Name = "DemonicLabel"
+        demonicLabel.TextColor3 = Color3.fromRGB(180, 0, 0) 
 
         local gradient = Instance.new("UIGradient")
-        gradient.Color = ColorSequence.new{
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(180, 0, 0)),
-            ColorSequenceKeypoint.new(0.45, Color3.fromRGB(180, 0, 0)),
-            ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 100, 100)),
-            ColorSequenceKeypoint.new(0.55, Color3.fromRGB(180, 0, 0)),
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 0, 0)),
-        }
-        gradient.Rotation = 0
         gradient.Parent = demonicLabel
 
-        local songsLabel = instances.TextLabel_3
+        gradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0.00, Color3.fromRGB(120, 0, 0)),   -- ciemny czerwony
+            ColorSequenceKeypoint.new(0.30, Color3.fromRGB(180, 0, 0)),   -- czerwony
+            ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 90, 90)), -- jasny metaliczny blask
+            ColorSequenceKeypoint.new(0.70, Color3.fromRGB(180, 0, 0)),   -- czerwony
+            ColorSequenceKeypoint.new(1.00, Color3.fromRGB(120, 0, 0))    -- ciemny czerwony
+        }
+
+        gradient.Rotation = 0
+        gradient.Offset = Vector2.new(0, 0)
+
+        local RunService = game:GetService("RunService")
+
+        local speed = 0.5
+        local offset = 0
+
+        RunService.Heartbeat:Connect(function(dt)
+            offset = offset + dt * speed
+            if offset > 1 then
+                offset = offset - 1
+            end
+
+            local wave = math.sin(offset * math.pi * 4) * 0.05
+            gradient.Offset = Vector2.new(offset, wave)
+        end)
+
+        -- Label 'Songs' - biały statyczny
+        local songsLabel = Instance.new("TextLabel")
         songsLabel.Parent = frame
-        songsLabel.Name = "SongsLabel"
         songsLabel.Font = Enum.Font[font]
         songsLabel.Text = "Songs"
         songsLabel.TextSize = 14
@@ -71,64 +92,60 @@ function notif:Notification(title, desc, font, font2, visibletime)
         songsLabel.BackgroundTransparency = 1
         songsLabel.Position = UDim2.new(0.25, 0, 0, 0)
         songsLabel.Size = UDim2.new(0, 80, 0, 28)
+        songsLabel.Name = "SongsLabel"
         songsLabel.TextColor3 = Color3.new(1, 1, 1)
 
-        local descriptionLabel = instances.TextLabel_2
-        descriptionLabel.Parent = frame
-        descriptionLabel.Name = "Description"
-        descriptionLabel.Font = Enum.Font[font2]
-        descriptionLabel.Text = desc
-        descriptionLabel.TextColor3 = Color3.new(1, 1, 1)
-        descriptionLabel.TextSize = 13
-        descriptionLabel.TextTruncate = Enum.TextTruncate.AtEnd
-        descriptionLabel.TextXAlignment = Enum.TextXAlignment.Left
-        descriptionLabel.BackgroundTransparency = 1
-        descriptionLabel.Position = UDim2.new(0.086, 0, 0.604, 0)
-        descriptionLabel.Size = UDim2.new(0, 191, 0, 9)
+        -- Opis
+        instances.TextLabel_2.Parent = instances.Frame_1
+        instances.TextLabel_2.Font = Enum.Font[font2]
+        instances.TextLabel_2.Text = desc
+        instances.TextLabel_2.TextColor3 = Color3.new(1, 1, 1)
+        instances.TextLabel_2.TextSize = 13
+        instances.TextLabel_2.TextTruncate = Enum.TextTruncate.AtEnd
+        instances.TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+        instances.TextLabel_2.BackgroundTransparency = 1
+        instances.TextLabel_2.Position = UDim2.new(0.086, 0, 0.604, 0)
+        instances.TextLabel_2.Size = UDim2.new(0, 191, 0, 9)
+        instances.TextLabel_2.Name = 'Description'
 
-        local closeButton = instances.TextButton_1
-        closeButton.Parent = frame
-        closeButton.Name = "Close"
-        closeButton.Font = Enum.Font.GothamSemibold
-        closeButton.Text = "X"
-        closeButton.TextColor3 = Color3.new(1, 1, 1)
-        closeButton.TextSize = 18
-        closeButton.BackgroundColor3 = Color3.new(1, 1, 1)
-        closeButton.BackgroundTransparency = 1
-        closeButton.Position = UDim2.new(0.907, 0, 0, 0)
-        closeButton.Size = UDim2.new(0, 16, 0, 61)
+        -- Przycisk zamknięcia
+        instances.TextButton_1.Parent = instances.Frame_1
+        instances.TextButton_1.Font = Enum.Font.GothamSemibold
+        instances.TextButton_1.Text = 'X'
+        instances.TextButton_1.TextColor3 = Color3.new(1, 1, 1)
+        instances.TextButton_1.TextSize = 18
+        instances.TextButton_1.BackgroundTransparency = 1
+        instances.TextButton_1.Position = UDim2.new(0.907, 0, 0, 0)
+        instances.TextButton_1.Size = UDim2.new(0, 16, 0, 61)
+        instances.TextButton_1.Name = 'Close'
 
-        local RunService = game:GetService("RunService")
-        local offset = 0
-        local speed = 0.2
-        local heartbeatConnection
+        -- Skrypt przycisku zamknięcia
+        instances.LocalScript_1.Parent = instances.TextButton_1
 
-        heartbeatConnection = RunService.Heartbeat:Connect(function(dt)
-            offset = offset + dt * speed
-            if offset > 1 then
-                offset = offset - 1
-            end
-            gradient.Offset = Vector2.new(offset, 0)
-        end)
-
-        closeButton.MouseButton1Down:Connect(function()
-            heartbeatConnection:Disconnect()
-            frame:TweenPosition(UDim2.new(1.5, 0, frame.Position.Y.Scale, frame.Position.Y.Offset), "InOut", "Sine", 0.5, true, function()
-                screenGui:Destroy()
+        function Code_LocalScript_1()
+            local script = instances.LocalScript_1
+            script.Parent.MouseButton1Down:Connect(function()
+                script.Parent.Parent:TweenPosition(UDim2.new(50, 0, 0, 0), "InOut", "Sine", 7.2)
+                wait(2)
+                script.Parent.Parent.Parent:Destroy()
             end)
-        end)
+        end
+        coroutine.wrap(Code_LocalScript_1)()
 
-        frame:TweenPosition(UDim2.new(0.68, 0, 0.509, 0), "InOut", "Sine", 0.5)
+        -- Animacja pojawienia się UI
+        instances.LocalScript_2.Parent = instances.Frame_1
 
-        spawn(function()
-            wait(visibletime)
-            if heartbeatConnection.Connected then
-                heartbeatConnection:Disconnect()
-            end
-            frame:TweenPosition(UDim2.new(1.5, 0, frame.Position.Y.Scale, frame.Position.Y.Offset), "InOut", "Sine", 0.5, true, function()
-                screenGui:Destroy()
-            end)
-        end)
+        function Code_LocalScript_2()
+            local script = instances.LocalScript_2
+            local newpos = UDim2.new(0.82, 0, 0.507, 0)
+            script.Parent:TweenPosition(newpos, "InOut", "Sine", 0.5)
+        end
+        coroutine.wrap(Code_LocalScript_2)()
+
+        wait(visibletime)
+        instances.Frame_1:TweenPosition(UDim2.new(50, 0, 0, 0), "InOut", "Sine", 7.2)
+        wait(2)
+        screenGui:Destroy()
     end)
 end
 
