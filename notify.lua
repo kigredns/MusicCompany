@@ -12,6 +12,7 @@ function notif:Notification(title, desc, font, font2, visibletime)
             ["UICorner_2"] = Instance.new("UICorner"),
             ["Frame_1"] = Instance.new("Frame"),
             ["TextButton_1"] = Instance.new("TextButton"),
+            -- Usuwam TextLabel_1 i TextLabel_2, bo tworzymy je dynamicznie
         }
 
         screenGui.Name = title
@@ -22,8 +23,8 @@ function notif:Notification(title, desc, font, font2, visibletime)
 
         instances.Frame_1.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
         instances.Frame_1.BorderSizePixel = 0
-        instances.Frame_1.Position = UDim2.new(1, 0, 0.5, -45) -- start poza ekranem po prawej
-        instances.Frame_1.Size = UDim2.new(0, 400, 0, 90)
+        instances.Frame_1.Position = UDim2.new(1, 0, 0.5, 0)
+        instances.Frame_1.Size = UDim2.new(0, 400, 0, 90) -- większy frame, więcej miejsca na tekst
 
         instances.Frame_2.Parent = instances.Frame_1
         instances.Frame_2.BackgroundColor3 = Color3.new(0.0431373, 0.0431373, 0.0431373)
@@ -36,12 +37,12 @@ function notif:Notification(title, desc, font, font2, visibletime)
         instances.UICorner_2.Parent = instances.Frame_1
         instances.UICorner_2.CornerRadius = UDim.new(0, 7)
 
-        -- Song (biały)
+        -- Label "Song" (biały)
         local songLabel = Instance.new("TextLabel")
         songLabel.Parent = instances.Frame_1
         songLabel.Font = Enum.Font[font]
         songLabel.Text = "Song"
-        songLabel.TextColor3 = Color3.new(1, 1, 1)
+        songLabel.TextColor3 = Color3.new(1, 1, 1) -- biały
         songLabel.TextSize = 20
         songLabel.TextXAlignment = Enum.TextXAlignment.Left
         songLabel.BackgroundTransparency = 1
@@ -49,7 +50,7 @@ function notif:Notification(title, desc, font, font2, visibletime)
         songLabel.Size = UDim2.new(0, 80, 0, 30)
         songLabel.Name = "SongLabel"
 
-        -- Extra (czerwony metaliczny animowany)
+        -- Label "Extra" (czerwony metaliczny animowany)
         local extraLabel = Instance.new("TextLabel")
         extraLabel.Parent = instances.Frame_1
         extraLabel.Font = Enum.Font[font]
@@ -64,16 +65,16 @@ function notif:Notification(title, desc, font, font2, visibletime)
         local gradient = Instance.new("UIGradient")
         gradient.Parent = extraLabel
         gradient.Color = ColorSequence.new{
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(180, 20, 20)),
-            ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 80, 80)),
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 20, 20))
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(150, 0, 0)),
+            ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 100, 100)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 0, 0))
         }
 
         RunService.RenderStepped:Connect(function()
-            gradient.Offset = Vector2.new((math.sin(tick() * 3) + 1) / 2, 0)
+            gradient.Offset = Vector2.new(math.sin(tick() * 3) * 0.5, 0)
         end)
 
-        -- Opis (desc)
+        -- Opis (desc) - teraz z zawijaniem i większy
         local descLabel = Instance.new("TextLabel")
         descLabel.Parent = instances.Frame_1
         descLabel.Font = Enum.Font[font2]
@@ -87,7 +88,7 @@ function notif:Notification(title, desc, font, font2, visibletime)
         descLabel.Size = UDim2.new(0, 320, 0, 30)
         descLabel.Name = "Description"
 
-        -- Przycisk zamknięcia X
+        -- Przycisk zamknięcia
         instances.TextButton_1.Parent = instances.Frame_1
         instances.TextButton_1.Font = Enum.Font.GothamSemibold
         instances.TextButton_1.Text = 'X'
@@ -102,11 +103,11 @@ function notif:Notification(title, desc, font, font2, visibletime)
         instances.LocalScript_1.Parent = instances.TextButton_1
         instances.LocalScript_2.Parent = instances.Frame_1
 
-        function Code_LocalScript_1()
+        function Code_LocalScript_1() --LocalScript zamykający notyfikację po kliknięciu X
             local script = instances.LocalScript_1
             script.Parent.MouseButton1Down:Connect(function()
-                script.Parent.Parent:TweenPosition(UDim2.new(1, 0, 0.5, -45), "InOut", "Sine", 0.5)
-                wait(0.6)
+                script.Parent.Parent:TweenPosition(UDim2.new(50, 0, 0, 0), "InOut", "Sine", 7.2)
+                wait(2)
                 script.Parent.Parent.Parent:Destroy()
             end)
         end
@@ -114,14 +115,14 @@ function notif:Notification(title, desc, font, font2, visibletime)
 
         function Code_LocalScript_2()
             local script = instances.LocalScript_2
-            local newpos = UDim2.new(0.6, 0, 0.5, -45)
+            local newpos = UDim2.new(0.82, 0, 0.5, 0)
             script.Parent:TweenPosition(newpos, "InOut", "Sine", 0.5)
         end
         coroutine.wrap(Code_LocalScript_2)()
 
         wait(visibletime)
-        instances.Frame_1:TweenPosition(UDim2.new(1, 0, 0.5, -45), "InOut", "Sine", 0.5)
-        wait(0.6)
+        instances.Frame_1:TweenPosition(UDim2.new(50, 0, 0, 0), "InOut", "Sine", 7.2)
+        wait(2)
         screenGui:Destroy()
     end)
 end
