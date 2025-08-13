@@ -130,21 +130,47 @@ stroke.Parent = Main
     TabHoldLayout.SortOrder = Enum.SortOrder.LayoutOrder
     TabHoldLayout.Padding = UDim.new(0, 11)
 
-    Title.Name = "Title"
-    Title.Parent = Main
-    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Title.BackgroundTransparency = 1.000
-    Title.Position = UDim2.new(0.0339285731, 0, 0.0564263314, 0)
-    Title.Size = UDim2.new(0, 200, 0, 23)
-    Title.Font = Enum.Font.GothamSemibold
-    Title.Text = text
-    Title.TextColor3 = Color3.fromRGB(68, 68, 68)
-    Title.TextSize = 12.000
-    Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Name = "Title"
+Title.Parent = Main
+Title.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
+Title.BackgroundTransparency = 1.000
+Title.Position = UDim2.new(0.0339285731, 0, 0.0564263314, 0)
+Title.Size = UDim2.new(0, 200, 0, 23)
+Title.Font = Enum.Font.GothamSemibold
+Title.Text = text
+Title.TextSize = 21.000
+Title.TextXAlignment = Enum.TextXAlignment.Left
+
+local function waveMetallicRed(t)
+    local brightness = 0.7 + 0.3 * math.sin(t * 3)
+    local r = 255
+    local g = math.floor(30 + 60 * brightness)
+    local b = math.floor(30 + 60 * brightness)
+    r = math.clamp(r * brightness, 0, 255)
+    g = math.clamp(g * brightness, 0, 255)
+    b = math.clamp(b * brightness, 0, 255)
+    return Color3.fromRGB(r, g, b)
+end
+
+if Title.Text == "Demonic" then
+    task.spawn(function()
+        local t = 0
+        while true do
+            t += 0.05
+            Title.TextColor3 = waveMetallicRed(t)
+            task.wait(0.05)
+        end
+    end)
+elseif Title.Text == "Songs" then
+    Title.TextColor3 = Color3.new(1,1,1) 
+else
+    Title.TextColor3 = Color3.new(0.27,0.27,0.27) 
+end
+
 
     DragFrame.Name = "DragFrame"
     DragFrame.Parent = Main
-    DragFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    DragFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     DragFrame.BackgroundTransparency = 1.000
     DragFrame.Size = UDim2.new(0, 560, 0, 41)
 
@@ -237,16 +263,27 @@ stroke.Parent = Main
             true
         )
 
-        OkayBtn.Name = "OkayBtn"
-        OkayBtn.Parent = NotificationFrame
-        OkayBtn.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
-        OkayBtn.Position = UDim2.new(0.0609756112, 0, 0.720207274, 0)
-        OkayBtn.Size = UDim2.new(0, 144, 0, 42)
-        OkayBtn.AutoButtonColor = false
-        OkayBtn.Font = Enum.Font.SourceSans
-        OkayBtn.Text = ""
-        OkayBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
-        OkayBtn.TextSize = 14.000
+OkayBtn.Name = "OkayBtn"
+OkayBtn.Parent = NotificationFrame
+OkayBtn.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+OkayBtn.Position = UDim2.new(0.0609756112, 0, 0.720207274, 0)
+OkayBtn.Size = UDim2.new(0, 144, 0, 42)
+OkayBtn.AutoButtonColor = false
+OkayBtn.Font = Enum.Font.SourceSans
+OkayBtn.Text = ""
+OkayBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+OkayBtn.TextSize = 14.000
+
+local okayCorner = Instance.new("UICorner")
+okayCorner.CornerRadius = UDim.new(0, 6) 
+okayCorner.Parent = OkayBtn
+
+local okayStroke = Instance.new("UIStroke")
+okayStroke.Thickness = 1.5
+okayStroke.Color = Color3.fromRGB(255, 255, 255)
+okayStroke.Transparency = 0.5
+okayStroke.Parent = OkayBtn
+
 
         OkayBtnCorner.CornerRadius = UDim.new(0, 5)
         OkayBtnCorner.Name = "OkayBtnCorner"
@@ -359,7 +396,7 @@ stroke.Parent = Main
         TabTitle.Font = Enum.Font.Gotham
         TabTitle.Text = text
         TabTitle.TextColor3 = Color3.fromRGB(150, 150, 150)
-        TabTitle.TextSize = 14.000
+        TabTitle.TextSize = 18.000
         TabTitle.TextXAlignment = Enum.TextXAlignment.Left
 
         TabBtnIndicator.Name = "TabBtnIndicator"
@@ -842,7 +879,7 @@ stroke.Parent = Main
 
             Dropdown.Name = "Dropdown"
             Dropdown.Parent = Tab
-            Dropdown.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+            Dropdown.BackgroundColor3 = Color3.fromRGB(14, 14, 14)
             Dropdown.ClipsDescendants = true
             Dropdown.Position = UDim2.new(-0.541071415, 0, -0.532915354, 0)
             Dropdown.Size = UDim2.new(0, 363, 0, 42)
@@ -851,15 +888,26 @@ stroke.Parent = Main
             DropdownCorner.Name = "DropdownCorner"
             DropdownCorner.Parent = Dropdown
 
-            DropdownBtn.Name = "DropdownBtn"
-            DropdownBtn.Parent = Dropdown
-            DropdownBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            DropdownBtn.BackgroundTransparency = 1.000
-            DropdownBtn.Size = UDim2.new(0, 363, 0, 42)
-            DropdownBtn.Font = Enum.Font.SourceSans
-            DropdownBtn.Text = ""
-            DropdownBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
-            DropdownBtn.TextSize = 14.000
+DropdownBtn.Name = "DropdownBtn"
+DropdownBtn.Parent = Dropdown
+DropdownBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DropdownBtn.BackgroundTransparency = 1.000
+DropdownBtn.Size = UDim2.new(0, 363, 0, 42)
+DropdownBtn.Font = Enum.Font.SourceSans
+DropdownBtn.Text = ""
+DropdownBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+DropdownBtn.TextSize = 14.000
+
+local dropCorner = Instance.new("UICorner")
+dropCorner.CornerRadius = UDim.new(0, 6)
+dropCorner.Parent = DropdownBtn
+
+local dropStroke = Instance.new("UIStroke")
+dropStroke.Thickness = 1.5
+dropStroke.Color = Color3.fromRGB(255, 255, 255)
+dropStroke.Transparency = 0.5
+dropStroke.Parent = DropdownBtn
+
 
             DropdownTitle.Name = "DropdownTitle"
             DropdownTitle.Parent = Dropdown
@@ -944,7 +992,7 @@ stroke.Parent = Main
 
                 Item.Name = "Item"
                 Item.Parent = DropItemHolder
-                Item.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+                Item.BackgroundColor3 = Color3.fromRGB(14, 14, 14)
                 Item.ClipsDescendants = true
                 Item.Size = UDim2.new(0, 335, 0, 25)
                 Item.AutoButtonColor = false
@@ -962,7 +1010,7 @@ stroke.Parent = Main
                         TweenService:Create(
                             Item,
                             TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                            {BackgroundColor3 = Color3.fromRGB(37, 37, 37)}
+                            {BackgroundColor3 = Color3.fromRGB(17, 17, 17)}
                         ):Play()
                     end
                 )
@@ -972,7 +1020,7 @@ stroke.Parent = Main
                         TweenService:Create(
                             Item,
                             TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                            {BackgroundColor3 = Color3.fromRGB(34, 34, 34)}
+                            {BackgroundColor3 = Color3.fromRGB(14, 14, 14)}
                         ):Play()
                     end
                 )
@@ -1078,7 +1126,7 @@ stroke.Parent = Main
 
             ConfirmBtn.Name = "ConfirmBtn"
             ConfirmBtn.Parent = ColorpickerTitle
-            ConfirmBtn.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+            ConfirmBtn.BackgroundColor3 = Color3.fromRGB(14, 14, 14)
             ConfirmBtn.Position = UDim2.new(1.25814295, 0, 1.09037197, 0)
             ConfirmBtn.Size = UDim2.new(0, 105, 0, 32)
             ConfirmBtn.AutoButtonColor = false
