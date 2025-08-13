@@ -2,6 +2,8 @@ local notif = {}
 
 function notif:Notification(title, desc, font, font2, visibletime)
     pcall(function()
+        local RunService = game:GetService("RunService")
+
         local screenGui = Instance.new("ScreenGui", game:GetService("CoreGui"))
         screenGui.Name = title
         screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -40,7 +42,7 @@ function notif:Notification(title, desc, font, font2, visibletime)
 
         local frame = instances.Frame_1
 
-        -- Label 'Demonic' z metaliczną falującą animacją
+        -- Label 'Demonic' z metaliczną animacją falującego gradientu
         local demonicLabel = Instance.new("TextLabel")
         demonicLabel.Parent = frame
         demonicLabel.Font = Enum.Font[font]
@@ -51,38 +53,21 @@ function notif:Notification(title, desc, font, font2, visibletime)
         demonicLabel.Position = UDim2.new(0.088, 0, 0, 0)
         demonicLabel.Size = UDim2.new(0, 80, 0, 28)
         demonicLabel.Name = "DemonicLabel"
-        demonicLabel.TextColor3 = Color3.fromRGB(180, 0, 0) 
+        demonicLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
 
         local gradient = Instance.new("UIGradient")
         gradient.Parent = demonicLabel
-
         gradient.Color = ColorSequence.new{
-            ColorSequenceKeypoint.new(0.00, Color3.fromRGB(120, 0, 0)),   -- ciemny czerwony
-            ColorSequenceKeypoint.new(0.30, Color3.fromRGB(180, 0, 0)),   -- czerwony
-            ColorSequenceKeypoint.new(0.50, Color3.fromRGB(255, 90, 90)), -- jasny metaliczny blask
-            ColorSequenceKeypoint.new(0.70, Color3.fromRGB(180, 0, 0)),   -- czerwony
-            ColorSequenceKeypoint.new(1.00, Color3.fromRGB(120, 0, 0))    -- ciemny czerwony
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(150, 0, 0)),
+            ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 200, 200)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 0, 0))
         }
 
-        gradient.Rotation = 0
-        gradient.Offset = Vector2.new(0, 0)
-
-        local RunService = game:GetService("RunService")
-
-        local speed = 0.5
-        local offset = 0
-
-        RunService.Heartbeat:Connect(function(dt)
-            offset = offset + dt * speed
-            if offset > 1 then
-                offset = offset - 1
-            end
-
-            local wave = math.sin(offset * math.pi * 4) * 0.05
-            gradient.Offset = Vector2.new(offset, wave)
+        RunService.RenderStepped:Connect(function()
+            gradient.Offset = Vector2.new(math.sin(tick() * 2) * 0.5, 0)
         end)
 
-        -- Label 'Songs' - biały statyczny
+        -- Label 'Songs' statyczny biały
         local songsLabel = Instance.new("TextLabel")
         songsLabel.Parent = frame
         songsLabel.Font = Enum.Font[font]
