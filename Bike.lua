@@ -130,42 +130,45 @@ stroke.Parent = Main
     TabHoldLayout.SortOrder = Enum.SortOrder.LayoutOrder
     TabHoldLayout.Padding = UDim.new(0, 11)
 
+local Title = Instance.new("TextLabel")
 Title.Name = "Title"
 Title.Parent = Main
 Title.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
-Title.BackgroundTransparency = 1.000
-Title.Position = UDim2.new(0.0339285731, 0, 0.0564263314, 0)
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0.0339, 0, 0.0564, 0)
 Title.Size = UDim2.new(0, 200, 0, 23)
 Title.Font = Enum.Font.GothamSemibold
-Title.Text = text
-Title.TextSize = 21.000
+Title.RichText = true
+Title.Text = '<font color="rgb(255,255,255)">Demonic Songs</font>' -- cały tekst na biało (podstawa)
+Title.TextSize = 12
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
-local function waveMetallicRed(t)
-    local brightness = 0.7 + 0.3 * math.sin(t * 3)
-    local r = 255
-    local g = math.floor(30 + 60 * brightness)
-    local b = math.floor(30 + 60 * brightness)
-    r = math.clamp(r * brightness, 0, 255)
-    g = math.clamp(g * brightness, 0, 255)
-    b = math.clamp(b * brightness, 0, 255)
-    return Color3.fromRGB(r, g, b)
-end
 
-if Title.Text == "Demonic" then
-    task.spawn(function()
-        local t = 0
-        while true do
-            t += 0.05
-            Title.TextColor3 = waveMetallicRed(t)
-            task.wait(0.05)
-        end
-    end)
-elseif Title.Text == "Songs" then
-    Title.TextColor3 = Color3.new(1,1,1) 
-else
-    Title.TextColor3 = Color3.new(0.27,0.27,0.27) 
-end
+local Demonic = Instance.new("TextLabel")
+Demonic.Name = "Demonic"
+Demonic.Parent = Title
+Demonic.BackgroundTransparency = 1
+Demonic.Position = UDim2.new(0, 0, 0, 0)
+Demonic.Size = UDim2.new(0, 70, 1, 0) 
+Demonic.Font = Enum.Font.GothamSemibold
+Demonic.TextSize = 25
+Demonic.TextXAlignment = Enum.TextXAlignment.Left
+Demonic.Text = "Demonic"
+Demonic.TextColor3 = Color3.fromRGB(255, 0, 0)
+
+local gradient = Instance.new("UIGradient")
+gradient.Parent = Demonic
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(150, 0, 0)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 200, 200)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 0, 0)),
+}
+
+local RunService = game:GetService("RunService")
+RunService.RenderStepped:Connect(function()
+    gradient.Offset = Vector2.new(math.sin(tick() * 2) * 0.5, 0)
+end)
+
 
 
     DragFrame.Name = "DragFrame"
