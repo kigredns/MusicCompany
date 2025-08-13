@@ -116,8 +116,6 @@ stroke.Thickness = 2
 stroke.Transparency = 0.3 
 stroke.Parent = Main
 
-
-
     TabHold.Name = "TabHold"
     TabHold.Parent = Main
     TabHold.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -130,31 +128,44 @@ stroke.Parent = Main
     TabHoldLayout.SortOrder = Enum.SortOrder.LayoutOrder
     TabHoldLayout.Padding = UDim.new(0, 11)
 
-local Title = Instance.new("TextLabel")
-Title.Name = "Title"
-Title.Parent = Main
-Title.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
-Title.BackgroundTransparency = 1
-Title.Position = UDim2.new(0.0339, 0, 0.0564, 0)
-Title.Size = UDim2.new(0, 200, 0, 23)
-Title.Font = Enum.Font.GothamSemibold
-Title.RichText = true
-Title.Text = '<font color="rgb(255,255,255)">Demonic Songs</font>' -- cały tekst na biało (podstawa)
-Title.TextSize = 12
-Title.TextXAlignment = Enum.TextXAlignment.Left
+local RunService = game:GetService("RunService")
 
+local frame = Main 
 
-local Demonic = Instance.new("TextLabel")
-Demonic.Name = "Demonic"
-Demonic.Parent = Title
-Demonic.BackgroundTransparency = 1
-Demonic.Position = UDim2.new(0, 0, 0, 0)
-Demonic.Size = UDim2.new(0, 70, 1, 0) 
-Demonic.Font = Enum.Font.GothamSemibold
-Demonic.TextSize = 25
-Demonic.TextXAlignment = Enum.TextXAlignment.Left
-Demonic.Text = "Demonic"
-Demonic.TextColor3 = Color3.fromRGB(255, 0, 0)
+local demonicLabel = Instance.new("TextLabel")
+demonicLabel.Parent = frame
+demonicLabel.BackgroundTransparency = 1
+demonicLabel.Position = UDim2.new(0.0339, 0, 0.03, 0)
+demonicLabel.Size = UDim2.new(0, 80, 0, 23)
+demonicLabel.Font = Enum.Font.GothamSemibold
+demonicLabel.Text = "Demonic"
+demonicLabel.TextSize = 25
+demonicLabel.TextXAlignment = Enum.TextXAlignment.Left
+demonicLabel.TextColor3 = Color3.fromRGB(255, 0, 0)  
+
+local gradient = Instance.new("UIGradient")
+gradient.Parent = demonicLabel
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(150, 0, 0)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 200, 200)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 0, 0)),
+}
+
+RunService.RenderStepped:Connect(function()
+    gradient.Offset = Vector2.new(math.sin(tick() * 2) * 0.5, 0)
+end)
+
+local songsLabel = Instance.new("TextLabel")
+songsLabel.Parent = frame
+songsLabel.BackgroundTransparency = 1
+songsLabel.Position = UDim2.new(0.25, 0, 0.03, 0)  
+songsLabel.Size = UDim2.new(0, 80, 0, 23)
+songsLabel.Font = Enum.Font.GothamSemibold
+songsLabel.Text = "Songs"
+songsLabel.TextSize = 25
+songsLabel.TextXAlignment = Enum.TextXAlignment.Left
+songsLabel.TextColor3 = Color3.new(1, 1, 1)  
+
 
 local gradient = Instance.new("UIGradient")
 gradient.Parent = Demonic
