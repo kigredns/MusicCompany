@@ -158,7 +158,7 @@ end)
 local songsLabel = Instance.new("TextLabel")
 songsLabel.Parent = frame
 songsLabel.BackgroundTransparency = 1
-songsLabel.Position = UDim2.new(0.25, 0, 0.03, 0)  
+songsLabel.Position = UDim2.new(0.22, 0, 0.03, 0)  
 songsLabel.Size = UDim2.new(0, 80, 0, 23)
 songsLabel.Font = Enum.Font.GothamSemibold
 songsLabel.Text = "Songs"
