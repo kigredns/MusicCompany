@@ -928,7 +928,7 @@ dropCorner.Parent = DropdownBtn
 
 local dropStroke = Instance.new("UIStroke")
 dropStroke.Thickness = 1.5
-dropStroke.Color = Color3.fromRGB(255, 255, 255)
+dropStroke.Color = Color3.fromRGB(255, 0, 0)
 dropStroke.Transparency = 0.5
 dropStroke.Parent = DropdownBtn
 
@@ -1563,7 +1563,7 @@ dropStroke.Parent = DropdownBtn
             local LabelCorner = Instance.new("UICorner")
             local LabelTitle = Instance.new("TextLabel")
 
-local Label = Instance.new("TextButton")  -- lub TextLabel, jeśli to Label, nie przycisk
+local Label = Instance.new("TextButton")  
 Label.Name = "Button"
 Label.Parent = Tab
 Label.BackgroundColor3 = Color3.fromRGB(14, 14, 14)
@@ -1579,9 +1579,11 @@ corner.CornerRadius = UDim.new(0, 19)
 corner.Parent = Label
 
 local stroke = Instance.new("UIStroke")
-stroke.Color = Color3.fromRGB(255, 255, 255)
-stroke.Thickness = 2  
+stroke.Color = Color3.fromRGB(255, 0, 0) 
+stroke.Thickness = 2
+stroke.Transparency = 0.5
 stroke.Parent = Label
+
 
 
             LabelCorner.CornerRadius = UDim.new(0, 5)
