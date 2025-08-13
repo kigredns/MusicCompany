@@ -1,3 +1,4 @@
+-- ggg
 local notif = {}
 
 function notif:Notification(title, desc, font, font2, visibletime)
@@ -20,7 +21,7 @@ function notif:Notification(title, desc, font, font2, visibletime)
             ["TextButton_1"] = Instance.new("TextButton"),
         }
 
-        -- Główna ramka
+        -- Frame_1 (Main)
         instances.Frame_1.Parent = screenGui
         instances.Frame_1.Name = 'Main'
         instances.Frame_1.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
@@ -28,7 +29,7 @@ function notif:Notification(title, desc, font, font2, visibletime)
         instances.Frame_1.Position = UDim2.new(1, 0, 0.509, 0)
         instances.Frame_1.Size = UDim2.new(0, 331, 0, 61)
 
-        -- Lewy pasek
+        -- Frame_2 (Bar)
         instances.Frame_2.Parent = instances.Frame_1
         instances.Frame_2.BackgroundColor3 = Color3.new(0.0431373, 0.0431373, 0.0431373)
         instances.Frame_2.Size = UDim2.new(0, 11, 0, 61)
@@ -40,23 +41,20 @@ function notif:Notification(title, desc, font, font2, visibletime)
         instances.UICorner_2.Parent = instances.Frame_1
         instances.UICorner_2.CornerRadius = UDim.new(0, 7)
 
-        local frame = instances.Frame_1
-
-        -- Label 'Demonic' z metaliczną animacją falującego gradientu
-        local demonicLabel = Instance.new("TextLabel")
-        demonicLabel.Parent = frame
-        demonicLabel.Font = Enum.Font[font]
-        demonicLabel.Text = "Demonic"
-        demonicLabel.TextSize = 14
-        demonicLabel.TextXAlignment = Enum.TextXAlignment.Left
-        demonicLabel.BackgroundTransparency = 1
-        demonicLabel.Position = UDim2.new(0.088, 0, 0, 0)
-        demonicLabel.Size = UDim2.new(0, 80, 0, 28)
-        demonicLabel.Name = "DemonicLabel"
-        demonicLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+        -- TextLabel_1: "Demonic" with animated metallic red gradient
+        instances.TextLabel_1.Parent = instances.Frame_1
+        instances.TextLabel_1.Font = Enum.Font[font]
+        instances.TextLabel_1.Text = "Demonic"
+        instances.TextLabel_1.TextColor3 = Color3.fromRGB(255, 0, 0)
+        instances.TextLabel_1.TextSize = 14
+        instances.TextLabel_1.TextXAlignment = Enum.TextXAlignment.Left
+        instances.TextLabel_1.BackgroundTransparency = 1
+        instances.TextLabel_1.Position = UDim2.new(0.088, 0, 0, 0)
+        instances.TextLabel_1.Size = UDim2.new(0, 80, 0, 28)
+        instances.TextLabel_1.Name = "DemonicLabel"
 
         local gradient = Instance.new("UIGradient")
-        gradient.Parent = demonicLabel
+        gradient.Parent = instances.TextLabel_1
         gradient.Color = ColorSequence.new{
             ColorSequenceKeypoint.new(0, Color3.fromRGB(150, 0, 0)),
             ColorSequenceKeypoint.new(0.5, Color3.fromRGB(255, 200, 200)),
@@ -67,21 +65,20 @@ function notif:Notification(title, desc, font, font2, visibletime)
             gradient.Offset = Vector2.new(math.sin(tick() * 2) * 0.5, 0)
         end)
 
-        -- Label 'Songs' statyczny biały
-        local songsLabel = Instance.new("TextLabel")
-        songsLabel.Parent = frame
-        songsLabel.Font = Enum.Font[font]
-        songsLabel.Text = "Songs"
-        songsLabel.TextSize = 14
-        songsLabel.TextXAlignment = Enum.TextXAlignment.Left
-        songsLabel.BackgroundTransparency = 1
-        songsLabel.Position = UDim2.new(0.25, 0, 0, 0)
-        songsLabel.Size = UDim2.new(0, 80, 0, 28)
-        songsLabel.Name = "SongsLabel"
-        songsLabel.TextColor3 = Color3.new(1, 1, 1)
-
-        -- Opis
+        -- TextLabel_2: "Songs" white static text, placed after Demonic
         instances.TextLabel_2.Parent = instances.Frame_1
+        instances.TextLabel_2.Font = Enum.Font[font]
+        instances.TextLabel_2.Text = "Songs"
+        instances.TextLabel_2.TextColor3 = Color3.new(1, 1, 1)
+        instances.TextLabel_2.TextSize = 14
+        instances.TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+        instances.TextLabel_2.BackgroundTransparency = 1
+        instances.TextLabel_2.Position = UDim2.new(0.25, 0, 0, 0)
+        instances.TextLabel_2.Size = UDim2.new(0, 80, 0, 28)
+        instances.TextLabel_2.Name = "SongsLabel"
+
+        -- Description label (using passed desc)
+        instances.TextLabel_1.Parent = instances.Frame_1
         instances.TextLabel_2.Font = Enum.Font[font2]
         instances.TextLabel_2.Text = desc
         instances.TextLabel_2.TextColor3 = Color3.new(1, 1, 1)
@@ -93,7 +90,7 @@ function notif:Notification(title, desc, font, font2, visibletime)
         instances.TextLabel_2.Size = UDim2.new(0, 191, 0, 9)
         instances.TextLabel_2.Name = 'Description'
 
-        -- Przycisk zamknięcia
+        -- Close button
         instances.TextButton_1.Parent = instances.Frame_1
         instances.TextButton_1.Font = Enum.Font.GothamSemibold
         instances.TextButton_1.Text = 'X'
@@ -104,9 +101,8 @@ function notif:Notification(title, desc, font, font2, visibletime)
         instances.TextButton_1.Size = UDim2.new(0, 16, 0, 61)
         instances.TextButton_1.Name = 'Close'
 
-        -- Skrypt przycisku zamknięcia
+        -- LocalScript for close button
         instances.LocalScript_1.Parent = instances.TextButton_1
-
         function Code_LocalScript_1()
             local script = instances.LocalScript_1
             script.Parent.MouseButton1Down:Connect(function()
@@ -117,9 +113,8 @@ function notif:Notification(title, desc, font, font2, visibletime)
         end
         coroutine.wrap(Code_LocalScript_1)()
 
-        -- Animacja pojawienia się UI
+        -- LocalScript for initial tween in animation
         instances.LocalScript_2.Parent = instances.Frame_1
-
         function Code_LocalScript_2()
             local script = instances.LocalScript_2
             local newpos = UDim2.new(0.82, 0, 0.507, 0)
