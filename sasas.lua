@@ -1563,15 +1563,16 @@ dropStroke.Parent = DropdownBtn
             local LabelCorner = Instance.new("UICorner")
             local LabelTitle = Instance.new("TextLabel")
 
-local Label = Instance.new("TextButton")  -- lub TextLabel, jeśli to Label, nie przycisk
+local Label = Instance.new("TextButton")
 Label.Name = "Button"
 Label.Parent = Tab
-Label.BackgroundColor3 = Color3.fromRGB(14, 14, 14)
+Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255) 
+Label.BackgroundTransparency = 0.7
 Label.Size = UDim2.new(0, 363, 0, 42)
 Label.AutoButtonColor = false
 Label.Font = Enum.Font.SourceSans
 Label.Text = ""
-Label.TextColor3 = Color3.fromRGB(0, 0, 0)
+Label.TextColor3 = Color3.fromRGB(255, 0, 0)
 Label.TextSize = 14.000
 
 local corner = Instance.new("UICorner")
@@ -1582,6 +1583,7 @@ local stroke = Instance.new("UIStroke")
 stroke.Color = Color3.fromRGB(255, 255, 255)
 stroke.Thickness = 2  
 stroke.Parent = Label
+
 
 
             LabelCorner.CornerRadius = UDim.new(0, 5)
