@@ -1,3 +1,4 @@
+-- 1
 local lib = {RainbowColorValue = 0, HueSelectionPosition = 0}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -1566,23 +1567,21 @@ dropStroke.Parent = DropdownBtn
 local Label = Instance.new("TextButton")
 Label.Name = "Button"
 Label.Parent = Tab
-Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255) 
-Label.BackgroundTransparency = 0.7
+Label.BackgroundColor3 = Color3.fromRGB(0, 0, 0) 
+Label.BackgroundTransparency = 0.3 
 Label.Size = UDim2.new(0, 363, 0, 42)
 Label.AutoButtonColor = false
 Label.Font = Enum.Font.SourceSans
-Label.Text = ""
-Label.TextColor3 = Color3.fromRGB(255, 0, 0)
-Label.TextSize = 14.000
+Label.TextSize = 14
+Label.RichText = true 
 
 local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 19) 
+corner.CornerRadius = UDim.new(0, 19)
 corner.Parent = Label
 
-local stroke = Instance.new("UIStroke")
-stroke.Color = Color3.fromRGB(255, 255, 255)
-stroke.Thickness = 2  
-stroke.Parent = Label
+function tabcontent:Label(text)
+    Label.Text = '<font color="rgb(255,0,0)">' .. text .. '</font>' 
+end
 
 
 
